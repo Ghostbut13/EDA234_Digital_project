@@ -1,23 +1,24 @@
 -------------------------------------------------------------------------------
--- Title      : <title string>
--- Project    : 
+-- Title      : Digital segments showing 
+-- Project    : EDA234-LAB1
 -------------------------------------------------------------------------------
 -- File       : digital_show.vhdl
--- Author     :   <ASUS@LAPTOP-M6B560H3>
+-- Author     : weihanga@chalmers.se>
 -- Company    : 
--- Created    : 2022-11-03
--- Last update: 2022-11-05
+-- Created    : 2022-11-06
+-- Last update: 2022-11-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: <cursor>
+-- Description: show the numbers from the second counter on digital segment
 -------------------------------------------------------------------------------
 -- Copyright (c) 2022 
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2022-11-03  1.0      ASUS	Created
+-- 2022-11-06  1.0      ASUS	Created
 -------------------------------------------------------------------------------
+
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;

@@ -1,9 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use IEEE.std_logic_unsigned.all;
 
 ENTITY top_tb IS
 
 END ENTITY top_tb;
+
 
 ARCHITECTURE arch_top_tb of top_tb IS
   COMPONENT top IS 
@@ -32,7 +35,8 @@ ARCHITECTURE arch_top_tb of top_tb IS
   signal AN_signal : STD_LOGIC_VECTOR(7 downto 0);
   signal clk_sw_signal : std_logic:='0';
   signal rstn_signal : std_logic;
- 
+
+  
 BEGIN 
   
   top_1:
@@ -63,12 +67,6 @@ BEGIN
                       '0' after 150 ns,
                       '1' after 300 ns;
     
-
-  -- proc_test:
-  -- PROCESS
-  -- BEGIN
-  --  assert() 
- 
 
 
 End Architecture;

@@ -1,6 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/CTH-EESD/Q2/EDA234_Digital_project/lab1_hand_in/source/Cntsecond_forBolt.vhdl" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'Cntsecond_forBolt'
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/CTH-EESD/Q2/EDA234_Digital_project/lab1_hand_in/source/digital_show.vhdl" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'digital_show'
-INFO: [VRFC 10-163] Analyzing VHDL file "E:/CTH-EESD/Q2/EDA234_Digital_project/lab1_hand_in/source/top.vhdl" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'top'

@@ -1,42 +1,11 @@
--------------------------------------------------------------------------------
--- Title      : <title string>
--- Project    : 
--------------------------------------------------------------------------------
--- File       : digital_show.vhdl
--- Author     :   <ASUS@LAPTOP-M6B560H3>
--- Company    : 
--- Created    : 2022-11-03
--- Last update: 2022-11-03
--- Platform   : 
--- Standard   : VHDL'93/02
--------------------------------------------------------------------------------
--- Description: <cursor>
--------------------------------------------------------------------------------
--- Copyright (c) 2022 
--------------------------------------------------------------------------------
--- Revisions  :
--- Date        Version  Author  Description
--- 2022-11-03  1.0      ASUS	Created
--------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity digital_show is
   Port (
-
     clk_sw : in STD_LOGIC;
     rstn : in STD_LOGIC;
-    
     CA : out STD_LOGIC;
     CB : out STD_LOGIC;
     CC : out STD_LOGIC;
@@ -46,25 +15,20 @@ entity digital_show is
     CG : out STD_LOGIC;
     DP : out STD_LOGIC;
     AN : out STD_LOGIC_VECTOR (7 downto 0);
-
-
     cnt_L : in STD_LOGIC_VECTOR (3 downto 0);
     cnt_H : in STD_LOGIC_VECTOR (2 downto 0)
-
     );
 end digital_show;
 
-
 architecture arch_digital_show of digital_show is
-
   signal digital : std_logic_vector(6 downto 0);
   signal sel : std_logic;
   signal AN_TURN_ON : std_logic_vector(7 downto 0);
-  
+  signal show_number : std_logic_vector(3 downto 0);
   
 begin
+  
   L: process (clk_sw, rstn) is
-  --variable h_or_l : std_logic;
   begin
     if(rstn ='0') then
       digital <= "0000000";
@@ -74,31 +38,12 @@ begin
      sel<='1';
       if(sel='1') then
         AN_TURN_ON<="11111101";
-        case cnt_H is
-        when "000" =>
-          digital <= "1000000";
-        when "001" =>
-          digital <= "1111001";
-        when "010" =>
-          digital <= "0100100";
-        when "011" =>
-          digital <= "0110000";
-        when "100" =>
-          digital <= "0011001";
-        when "101" =>
-          digital <= "0010010";
-        
-          
-        when others => 
-        digital <="1111111";
-        
-      end case;
-      AN_TURN_ON<="11111101";
-      
+        show_number <= '0'&cnt_H;
       elsif(sel='0') then
         AN_TURN_ON<="11111110";
-        
-        case cnt_L is
+        show_number <= cnt_L;
+      end if; 
+        case show_number is
         when "0000" =>
           digital <= "1000000";
         when "0001" =>
@@ -123,12 +68,7 @@ begin
         when others => 
         digital <="1111111";
       end case;
-      
-      AN_TURN_ON<="11111110";
-      end if;
       sel <= not(sel);
-
-      
     end if;
     
   end process L;

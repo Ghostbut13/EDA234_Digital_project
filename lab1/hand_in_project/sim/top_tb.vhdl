@@ -7,6 +7,7 @@ ENTITY top_tb IS
 
 END ENTITY top_tb;
 
+
 ARCHITECTURE arch_top_tb of top_tb IS
   COMPONENT top IS 
   PORT(
@@ -34,7 +35,8 @@ ARCHITECTURE arch_top_tb of top_tb IS
   signal AN_signal : STD_LOGIC_VECTOR(7 downto 0);
   signal clk_sw_signal : std_logic:='0';
   signal rstn_signal : std_logic;
- 
+
+  
 BEGIN 
   
   top_1:
