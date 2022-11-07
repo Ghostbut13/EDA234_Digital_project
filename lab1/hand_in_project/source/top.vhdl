@@ -110,10 +110,10 @@ begin  -- architecture arch_top
     if rstn='0' then
       clk_1s <= '0';
       count_1s <= x"0000000";
-      --clk_sw <= '0';
+      clk_sw <= '0';
     elsif rising_edge(clk) then
       if count_1s=x"2faf07f" then
-      --if count_1s=x"00000010" then
+      --if count_1s=x"00000100" then
         count_1s <= x"0000000";
         clk_1s <= not(clk_1s);
       else 
@@ -121,32 +121,32 @@ begin  -- architecture arch_top
         
       end if;
       
-      -- if ("000000000000000000" = count_1s(17 downto 0)) then
-      -- --if ("000" = count_1s(2 downto 0)) then
-      --   clk_sw <= not(clk_sw);
-      -- else
-      --   --clk_sw <= clk_sw;
-      -- end if;
+      if ("000000000000000000" = count_1s(17 downto 0)) then
+      --if ("000" = count_1s(2 downto 0)) then
+        clk_sw <= not(clk_sw);
+      else
+        --clk_sw <= clk_sw;
+      end if;
            
     end if;
   end process proc_clk;
 
- proc_clk_sw: process (clk,rstn)
-  begin  -- process proc_clk
-    if rstn='0' then
-      count_sw <= x"00000";
-      clk_sw <= '0';
-    elsif rising_edge(clk) then
-      if count_sw=x"7a120" then
-      --if count_1s=x"00000010" then
-        count_sw <= x"00000";
-        clk_sw <= not(clk_sw);
-      else 
-        count_sw <= conv_std_logic_vector((unsigned(count_sw)+1),20);       
-      end if;
+ -- proc_clk_sw: process (clk,rstn)
+ --  begin  -- process proc_clk
+ --    if rstn='0' then
+ --      count_sw <= x"00000";
+ --      clk_sw <= '0';
+ --    elsif rising_edge(clk) then
+ --      if count_sw=x"7a120" then
+ --      --if count_1s=x"00000010" then
+ --        count_sw <= x"00000";
+ --        clk_sw <= not(clk_sw);
+ --      else 
+ --        count_sw <= conv_std_logic_vector((unsigned(count_sw)+1),20);       
+ --      end if;
       
-    end if;
-  end process proc_clk_sw;
+ --    end if;
+ --  end process proc_clk_sw;
 
   
   

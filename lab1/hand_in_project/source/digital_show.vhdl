@@ -49,7 +49,7 @@ architecture arch_digital_show of digital_show is
   
 begin
   
-  L: process (clk_sw, rstn)
+  L: process (clk_sw, rstn,show_number)
   begin
     if(rstn ='0') then
       digital <= "0000000";
@@ -64,7 +64,8 @@ begin
         show_number <= cnt_L;
       end if; 
       sel <= not(sel);
-      case show_number is
+    end if;
+    case show_number is
         when "0000" =>
           digital <= "1000000";
         when "0001" =>
@@ -89,7 +90,6 @@ begin
         when others => 
         digital <="1111111";
       end case;
-    end if;
     
   end process L;
   
