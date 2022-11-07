@@ -49,14 +49,13 @@ architecture arch_digital_show of digital_show is
   
 begin
   
-  L: process (clk_sw, rstn, show_number)
+  L: process (clk_sw, rstn)
   begin
     if(rstn ='0') then
       digital <= "0000000";
-      sel <= '1';
+      sel <= '0';
       AN_TURN_ON<="11111110";
     elsif rising_edge(clk_sw) then
-     sel<='1';
       if(sel='1') then
         AN_TURN_ON<="11111101";
         show_number <= '0'&cnt_H;
@@ -65,8 +64,7 @@ begin
         show_number <= cnt_L;
       end if; 
       sel <= not(sel);
-    end if;
-    case show_number is
+      case show_number is
         when "0000" =>
           digital <= "1000000";
         when "0001" =>
@@ -91,6 +89,8 @@ begin
         when others => 
         digital <="1111111";
       end case;
+    end if;
+    
   end process L;
   
   AN<=AN_TURN_ON;

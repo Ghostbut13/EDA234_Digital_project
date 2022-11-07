@@ -145,7 +145,6 @@ begin  -- architecture arch_top
         count_sw <= conv_std_logic_vector((unsigned(count_sw)+1),20);       
       end if;
       
-           
     end if;
   end process proc_clk_sw;
 
