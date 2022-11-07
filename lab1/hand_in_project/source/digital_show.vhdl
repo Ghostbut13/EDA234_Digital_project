@@ -6,7 +6,7 @@
 -- Author     : weihanga@chalmers.se>
 -- Company    : 
 -- Created    : 2022-11-06
--- Last update: 2022-11-06
+-- Last update: 2022-11-07
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ architecture arch_digital_show of digital_show is
   
 begin
   
-  L: process (clk_sw, rstn) is
+  L: process (clk_sw, rstn)
   begin
     if(rstn ='0') then
       digital <= "0000000";
@@ -64,7 +64,9 @@ begin
         AN_TURN_ON<="11111110";
         show_number <= cnt_L;
       end if; 
-        case show_number is
+      sel <= not(sel);
+    end if;
+    case show_number is
         when "0000" =>
           digital <= "1000000";
         when "0001" =>
@@ -89,9 +91,6 @@ begin
         when others => 
         digital <="1111111";
       end case;
-      sel <= not(sel);
-    end if;
-    
   end process L;
   
   AN<=AN_TURN_ON;

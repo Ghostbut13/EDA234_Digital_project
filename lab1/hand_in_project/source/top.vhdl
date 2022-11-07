@@ -6,7 +6,7 @@
 -- Author     : weihanga@chalmers.se  <ASUS@LAPTOP-M6B560H3>
 -- Company    : 
 -- Created    : 2022-11-03
--- Last update: 2022-11-06
+-- Last update: 2022-11-07
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -38,8 +38,7 @@ entity top is
     DP : out STD_LOGIC;
     AN : out STD_LOGIC_VECTOR (7 downto 0);
 
-    --clk : in STD_LOGIC;
-    clk_sw : in STD_LOGIC;
+    clk : in STD_LOGIC;
     rstn : in STD_LOGIC);
 
 end entity top;
@@ -69,7 +68,6 @@ architecture arch_top of top is
     port(
       clk : in std_logic;
       rstn: in std_logic;
-      EC: out std_logic;
       cnt_L: out std_logic_vector (3 downto 0);
       cnt_H: out std_logic_vector (2 downto 0)
       );
@@ -77,9 +75,10 @@ architecture arch_top of top is
 
   signal cnt_L_signal : std_logic_vector(3 downto 0);
   signal cnt_H_signal : std_logic_vector(2 downto 0);
-  signal EC_signal : std_logic;
   signal clk_1s:std_logic;
-  signal count_1s : std_logic_vector(23 downto 0);
+  signal clk_sw:std_logic;
+  signal count_1s : std_logic_vector(27 downto 0);
+  --signal count_sw : std_logic_vector(3 downto 0);
   
 begin  -- architecture arch_top
   digital_show_1: digital_show
@@ -102,25 +101,35 @@ begin  -- architecture arch_top
     port map (
       clk   => clk_1s,
       rstn  => rstn,
-      EC    => EC_signal,
       cnt_L => cnt_L_signal,
       cnt_H => cnt_H_signal);
   
   
-  proc_clk: process (clk_sw,rstn) is
+  proc_clk: process (clk,rstn)
   begin  -- process proc_clk
     if rstn='0' then
       clk_1s <= '0';
-      count_1s <= x"000000";
-    elsif rising_edge(clk_sw) then
-      if count_1s=x"989680" then
---	if count_1s=10 then
-        count_1s <= x"000000";
+      count_1s <= x"0000000";
+      clk_sw <= '0';
+    elsif rising_edge(clk) then
+      if count_1s=x"2faf07f" then
+      --if count_1s=x"00000010" then
+        count_1s <= x"0000000";
         clk_1s <= not(clk_1s);
-      else
-        count_1s <= conv_std_logic_vector((unsigned(count_1s)+1),24);
+      else 
+        count_1s <= conv_std_logic_vector((unsigned(count_1s)+1),28);
+        
       end if;
+      
+      if ("000000000000000000" = count_1s(17 downto 0)) then
+      --if ("000" = count_1s(2 downto 0)) then
+        clk_sw <= not(clk_sw);
+      else
+        --clk_sw <= clk_sw;
+      end if;
+           
     end if;
   end process proc_clk;
+
   
 end architecture arch_top;

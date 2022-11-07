@@ -20,7 +20,7 @@ ARCHITECTURE arch_top_tb of top_tb IS
     CG : out STD_LOGIC;
     DP : out STD_LOGIC;
     AN : out STD_LOGIC_VECTOR (7 downto 0);
-    clk_sw : in STD_LOGIC;
+    clk : in STD_LOGIC;
     rstn : in STD_LOGIC);
   END COMPONENT top;
 
@@ -33,7 +33,7 @@ ARCHITECTURE arch_top_tb of top_tb IS
   signal CG_signal : std_logic;
   signal DP_signal : std_logic;
   signal AN_signal : STD_LOGIC_VECTOR(7 downto 0);
-  signal clk_sw_signal : std_logic:='0';
+  signal clk_signal : std_logic:='0';
   signal rstn_signal : std_logic;
 
   
@@ -51,7 +51,7 @@ BEGIN
       CG =>CG_signal,
       DP =>DP_signal,
       AN =>AN_signal,
-      clk_sw => clk_sw_signal,
+      clk => clk_signal,
       rstn => rstn_signal);
   
 
@@ -59,7 +59,7 @@ BEGIN
   PROCESS 
   BEGIN
     WAIT FOR 5 ns; 
-    clk_sw_signal <= NOT(clk_sw_signal);
+    clk_signal <= NOT(clk_signal);
   END PROCESS clk_tb_proc;
 
   

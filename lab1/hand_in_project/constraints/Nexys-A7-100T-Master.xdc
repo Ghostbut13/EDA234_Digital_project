@@ -4,12 +4,12 @@
 ## - rename the used ports (in each line, after get_ports) according to the top level signal names in the project
 
 ## Clock signal
-set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports { clk_sw }]; ##IO_L12P_T1_MRCC_35 Sch=clk100mhz
+set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports { clk }]; ##IO_L12P_T1_MRCC_35 Sch=clk100mhz
 set_property -dict { PACKAGE_PIN B3    IOSTANDARD LVCMOS33 } [get_ports { rstn }]; 
 
 ##set_property -dict { PACKAGE_PIN F4    IOSTANDARD LVCMOS33 } [get_ports { clk }]; ##IO_L12P_T1_MRCC_35 Sch=clk100mhz
 ##create_clock -add -name clk -period 1000000 -waveform {0 500000}  [get_ports { clk }];
-create_clock -add -name clk_sw -period 10 -waveform {0 5}  [get_ports { clk_sw }];
+create_clock -add -name clk_sw -period 10 -waveform {0 5}  [get_ports { clk }];
 #create_generated_clock -name clk -divide_by 10000 -source [get_ports {clk_sw}] [get_pins { Cntsecond_forBolt_1/clk_sub }]
 
 

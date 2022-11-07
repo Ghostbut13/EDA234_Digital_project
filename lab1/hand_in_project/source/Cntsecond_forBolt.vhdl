@@ -6,7 +6,7 @@
 -- Author     : weihanga@chalmers.se
 -- Company    : 
 -- Created    : 2022-11-02
--- Last update: 2022-11-06
+-- Last update: 2022-11-07
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -28,7 +28,6 @@ entity Cntsecond_forBolt is
   port(
     clk : in std_logic;
     rstn: in std_logic;
-    EC: out std_logic;
     cnt_L: out std_logic_vector (3 downto 0);
     cnt_H: out std_logic_vector (2 downto 0)
     );
@@ -46,19 +45,15 @@ begin
     if(rstn = '0') then
       zero_nine := "0000";
       zero_five := "000";
-      EC <= '0';
     elsif rising_edge(clk) then
         zero_nine := zero_nine + '1';
         if(zero_nine = "1010") then
           zero_nine := "0000";
-          if(zero_five = "110")then
+          if(zero_five = "101")then
             zero_five := "000";
-            EC <= '1';
           else
             zero_five := zero_five+'1';
           end if;
-        else
-          EC <= '0';
         end if;
       end if;
     cnt_L <= zero_nine;

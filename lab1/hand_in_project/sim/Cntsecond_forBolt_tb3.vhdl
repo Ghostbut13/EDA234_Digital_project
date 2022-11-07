@@ -6,7 +6,7 @@
 -- Author     :   <ASUS@LAPTOP-M6B560H3>
 -- Company    : 
 -- Created    : 2022-11-02
--- Last update: 2022-11-06
+-- Last update: 2022-11-07
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -37,8 +37,7 @@ architecture arch_Cntsecond_forBolt_tb3 of Cntsecond_forBolt_tb3 is
       clk : in std_logic;
       rstn : in std_logic;
       cnt_H : out std_logic_vector(2 downto 0);
-      cnt_L : out std_logic_vector(3 downto 0);
-      EC : out std_logic
+      cnt_L : out std_logic_vector(3 downto 0)
       );
   end component Cntsecond_forBolt;
 
@@ -47,7 +46,6 @@ architecture arch_Cntsecond_forBolt_tb3 of Cntsecond_forBolt_tb3 is
   signal ce_tb3_signal : std_logic := '1';
   signal count_L_tb3_signal : std_logic_vector(3 downto 0);
   signal count_H_tb3_signal : std_logic_vector(2 downto 0);
-  signal ec_tb3_signal : std_logic;
 
   signal cnt_clk1s_tb3_signal: integer := 0;
 
@@ -57,8 +55,6 @@ begin
       port map (
         clk => clk_tb3_signal,
         rstn => rstn_tb3_signal,
-        EC => ec_tb3_signal,
-
         cnt_L => count_L_tb3_signal,
         cnt_H => count_H_tb3_signal);
   
