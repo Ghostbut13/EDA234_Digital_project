@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
--- Title      : Top
--- Project    : EDA234-lab1
+-- Title      : <title string>
+-- Project    : 
 -------------------------------------------------------------------------------
 -- File       : top.vhdl
--- Author     : weihanga@chalmers.se  <ASUS@LAPTOP-M6B560H3>
+-- Author     :   <ASUS@LAPTOP-M6B560H3>
 -- Company    : 
 -- Created    : 2022-11-03
--- Last update: 2022-11-06
+-- Last update: 2022-11-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -22,8 +22,7 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
---use ieee.numeric_std.all;
-use ieee.std_logic_arith.all;
+
 
 entity top is
   
@@ -79,9 +78,13 @@ architecture arch_top of top is
   signal cnt_H_signal : std_logic_vector(2 downto 0);
   signal EC_signal : std_logic;
   signal clk_1s:std_logic;
-  signal count_1s : std_logic_vector(23 downto 0);
+  signal count_1s : integer;
+  
+  
   
 begin  -- architecture arch_top
+ 
+  
   digital_show_1: digital_show
     port map (
       clk_sw => clk_sw,
@@ -111,14 +114,14 @@ begin  -- architecture arch_top
   begin  -- process proc_clk
     if rstn='0' then
       clk_1s <= '0';
-      count_1s <= x"000000";
+      count_1s <= 0;
     elsif rising_edge(clk_sw) then
-      if count_1s=x"989680" then
---	if count_1s=10 then
-        count_1s <= x"000000";
+      --if count_1s=10000000 then
+	if count_1s=10 then
+        count_1s <= 0;
         clk_1s <= not(clk_1s);
       else
-        count_1s <= conv_std_logic_vector((unsigned(count_1s)+1),24);
+        count_1s <= count_1s+1;
       end if;
     end if;
   end process proc_clk;

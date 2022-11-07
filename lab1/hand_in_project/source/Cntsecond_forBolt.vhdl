@@ -1,16 +1,16 @@
 -------------------------------------------------------------------------------
 -- Title      : <Cnt second for Bolt>
--- Project    : EDA234-lab1
+-- Project    : First hand in
 -------------------------------------------------------------------------------
 -- File       : Cntsecond_forBolt.vhdl
 -- Author     : weihanga@chalmers.se
 -- Company    : 
 -- Created    : 2022-11-02
--- Last update: 2022-11-06
+-- Last update: 2022-11-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: second counter 0 to 59
+-- Description: <cursor>
 -------------------------------------------------------------------------------
 -- Copyright (c) 2022 
 -------------------------------------------------------------------------------
@@ -48,6 +48,7 @@ begin
       zero_five := "000";
       EC <= '0';
     elsif rising_edge(clk) then
+      --if(CE = '1') then
         zero_nine := zero_nine + '1';
         if(zero_nine = "1010") then
           zero_nine := "0000";
@@ -61,6 +62,9 @@ begin
           EC <= '0';
         end if;
       end if;
+    --end if;
+
+
     cnt_L <= zero_nine;
     cnt_H <= zero_five;
 

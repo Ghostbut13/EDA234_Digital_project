@@ -1,24 +1,23 @@
 -------------------------------------------------------------------------------
--- Title      : Digital segments showing 
--- Project    : EDA234-LAB1
+-- Title      : <title string>
+-- Project    : 
 -------------------------------------------------------------------------------
 -- File       : digital_show.vhdl
--- Author     : weihanga@chalmers.se>
+-- Author     :   <ASUS@LAPTOP-M6B560H3>
 -- Company    : 
--- Created    : 2022-11-06
--- Last update: 2022-11-06
+-- Created    : 2022-11-03
+-- Last update: 2022-11-05
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
--- Description: show the numbers from the second counter on digital segment
+-- Description: <cursor>
 -------------------------------------------------------------------------------
 -- Copyright (c) 2022 
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2022-11-06  1.0      ASUS	Created
+-- 2022-11-03  1.0      ASUS	Created
 -------------------------------------------------------------------------------
-
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -64,7 +63,10 @@ begin
         AN_TURN_ON<="11111110";
         show_number <= cnt_L;
       end if; 
-        case show_number is
+        
+      sel <= not(sel);
+    end if;
+    case show_number is
         when "0000" =>
           digital <= "1000000";
         when "0001" =>
@@ -89,9 +91,6 @@ begin
         when others => 
         digital <="1111111";
       end case;
-      sel <= not(sel);
-    end if;
-    
   end process L;
   
   AN<=AN_TURN_ON;
