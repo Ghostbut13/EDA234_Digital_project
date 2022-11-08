@@ -16,7 +16,7 @@
 	pdfstartview=Fit,
 	breaklinks=true}
 	
-\title{EDA234 Lab 1 - Reflection:  Lab Tutorial}
+\title{EDA234 Lab 1:  Lab Tutorial}
 
 \author{Weihan Gao weihanga@chalmers.se} 
 
@@ -27,70 +27,74 @@
 \maketitle
 
 
-\section{Introduction}
+\section{First step}
 \label{sec:introduction}
-We created the second counter and show them on the two digital 7-segments. But the registers we used are 53. 
+We implemented the second counter in three modules – Cntsecond\_forBolt.vhdl, digital\_show.vhdl and top.vhdl. Cntsecond module counts the 1Hz clk\_1s and generates the 2 numbers – cnt\_L and cnt\_H, ranging from 0 to 9 and 0 to 5. They will be shown on two digital segments through the digital\_show module at nearly 200Hz. Top module contains these two modules and has a process to divide the system clk frequency(100MHz) into the two clks we want.
 
+
+The partner in the lab is Yuxiang Cao.
+
+\begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{1.png}
-\caption{\label{fig:data}Registers utilization}
+\caption{\label{fig:data}Simple block diagram.}
 \end{figure}
 
 
-
-\section{Second hand in}
-We
-
 \newpage
+
+\section{Second step}
+The registers we used are about 70 after initial implementation. And we first thought to reduce the use of sequential logic. So we put the case(for encoding) out of the rising\_edge in digital\_show.vhdl and the number of regs is down to 63.
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1\textwidth]{2.png}
-\caption{\label{fig:data}Coefficient array and Timetable of input x.}
+\includegraphics[width=0.6\textwidth]{2.png}
+\caption{\label{fig:data}Initial number of regs.}
 \end{figure}
 
 
 
-\caption{Timing summary.}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{3.png}
+\caption{\label{fig:data}Put the case out of rising\_edge(clk\_sw).}
 \end{figure}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=1\textwidth]{5.png}
-%\caption{\label{fig:data}.}
-%\end{figure}
-%
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=1\textwidth]{6.png}
-%\caption{\label{fig:data}.}
-%\end{figure}
 
 
 \newpage
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{4.png}
+\caption{\label{fig:data}Number of regs after first modification.}
+\end{figure}
+
+\newpage
+
+Then we found the biggest part of regs is those in LUT, which means two counters in fre\_div at top are over the limit. We could use only one counter to reach the requirement by containing the smaller counter in a bigger one. Finally, we used 43 regs and no latch.
 
 
-\subsection{Project Summary}
-Apart from the Settings, Board Part, the Project Summary contains Synthesis and Implementation message, timing message, the Resource Utilization in post-synthesis and post-implementation, DRC report, and the power consumed. When we map the RTL designs in an FPGA board, we need to consider the timing, and resource usage after correcting all critical warnings in Synthesis and Implementation, also need to choose the correct aim FPGA board.
 \begin{figure}[h]
-%\centering
-\subfigure[Synthesis and DRC]
-{
-    \begin{minipage}[b]{.5\linewidth}
-        %\centering
-        \includegraphics[width=5.5cm,height=4.cm]{7.png}
-    \end{minipage}
-}
-\subfigure[Implementation and Timing]
-{
- 	\begin{minipage}[b]{.5\linewidth}
-        %\centering
-        \includegraphics[width=5.5cm,height=4.cm]{8.png}
-    \end{minipage}
-}
+\centering
+\includegraphics[width=1\textwidth]{5.png}
+\caption{\label{fig:data}Two counters for freq\_div.}
+\end{figure}
 
-\caption{Project Summary.}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{6.png}
+\caption{\label{fig:data}Delete the clk\_sw proc and put them in the clk\_1s proc. When the number is 2\^18, the clk\_sw flips.}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{7.png}
+\caption{\label{fig:data}Final regs we used.}
 \end{figure}
 
 
