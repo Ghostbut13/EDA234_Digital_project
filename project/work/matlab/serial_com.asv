@@ -1,9 +1,0 @@
-clear;
-clc;
-close;
-
-
-sp_ = serialportlist
-s_list = serialport(s_port,9600)
-string = "hello world"
-write(s2,5:9,"uint8")
